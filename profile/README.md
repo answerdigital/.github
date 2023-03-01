@@ -6,4 +6,5 @@ We are a tech-agnostic business who provide a range of digital solutions in heal
 As well as contributing code in this organisation, we also contribute to open source projects with our clients:
 
 * [London AI Centre](https://github.com/AI4VBH)
+* [NVIDIA/NVFlare](https://github.com/NVIDIA/NVFlare)
 * [NHSX](https://github.com/nhsx)
