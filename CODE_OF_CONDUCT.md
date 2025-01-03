@@ -19,9 +19,10 @@ and orientation.
 ## Our Values
 
 Answer's values represent us and our culture and we are proud to be a truly
-value-driven business. These values guide everything we do; our team live and
-breathe them every day, making sure we do the best for our clients and help our
-own people to thrive.
+value-driven business. These values guide everything our staff do; our team live
+and breathe them every day, making sure we do the best for our clients and help
+our own people to thrive. We believe they apply equally to expected behaviour
+from all members of our open source community.
 
 **Put love in the room**: Empathy, trust and openness are integral when
 nurturing talent and bringing together teams of individuals with diverse
