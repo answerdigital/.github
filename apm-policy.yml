@@ -1,0 +1,68 @@
+# Answer Digital organisation APM policy.
+#
+# APM discovers this file from answerdigital/.github (the org has no .github-private), so it
+# applies to every answerdigital repository that runs `apm install` or `apm audit --ci`.
+# The repository is public, so any workflow token can read it and anyone can see what we allow.
+# Field reference: https://microsoft.github.io/apm/reference/policy-schema/
+# Policy enforcement is experimental in APM 0.35, so check the release notes before upgrading.
+
+name: answerdigital-baseline
+version: "2026.11.13"
+
+# Report violations without failing installs or CI while repositories adopt the policy.
+# Move to `block` once `apm audit --ci` is clean across the org.
+enforcement: warn
+
+# A cached copy that can't be refreshed is still used. `warn` keeps developers unblocked if
+# GitHub is unreachable, and a public policy repo has no access failures to guard against.
+fetch_failure: warn
+
+# Refresh the cached policy hourly, the APM default.
+cache:
+  ttl: 3600
+
+# Where APM packages may come from, and how they're pinned.
+dependencies:
+  # Owners we take packages from today. A pattern is matched against owner/repo, and `**`
+  # also covers a subdirectory package such as upstash/context7/skills/context7-mcp.
+  allow:
+    - answerdigital/**
+    - dgalarza/**
+    - dotnet/**
+    - microsoft/**
+    - shadcn/**
+    - upstash/**
+  # Every direct dependency must name a release tag (vX.Y.Z), an exact version, a bounded
+  # semver range or a full commit SHA. A branch or a missing ref tracks a moving tip.
+  require_pinned_constraint: true
+
+# MCP servers that APM writes into agent configuration.
+mcp:
+  # Matching is by server name, which a self-defined server chooses for itself, so a name
+  # allow-list adds little. Restrict the transport instead, and add `deny` for a known-bad name.
+  transport:
+    allow:
+      - http
+      - stdio
+  # Repositories define servers inline (`registry: false`) for tools they pin locally, such
+  # as ForecastHub's dotnet and aspire servers. The default, `warn`, would flag every one.
+  self_defined: allow
+  # Transitive servers (declared by a dependency, not the project) stay untrusted unless a
+  # project opts in with `--trust-transitive-mcp`. APM 0.35 reads this field but doesn't
+  # enforce it yet. It records the intent and matches APM's default.
+  trust_transitive: false
+
+# Agent targets a manifest may compile for. No target is enforced, so each repo picks its own.
+compilation:
+  target:
+    allow:
+      - claude
+      - copilot
+
+# Executable primitives (hooks, bin/, self-defined MCP, LSP and canvas) and lifecycle scripts
+# keep APM's own consent model: project lifecycle scripts run only after `apm lifecycle trust`,
+# and a package's executables deploy only when trusted. Nothing is denied org-wide yet.
+# `deny_all: true` here would also suppress every lifecycle script, such as ForecastHub's
+# post-install `dotnet tool restore`.
+executables:
+  deny_all: false
