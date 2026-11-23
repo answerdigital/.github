@@ -23,10 +23,11 @@ cache:
 
 # Where APM packages may come from, and how they're pinned.
 dependencies:
-  # Owners we take packages from today. A pattern is matched against owner/repo, and `**`
-  # also covers a subdirectory package such as upstash/context7/skills/context7-mcp.
+  # Owners and repositories we take packages from today. A pattern is matched against owner/repo,
+  # and `**` also covers a subdirectory package such as upstash/context7/skills/context7-mcp.
   allow:
     - answerdigital/**
+    - DietrichGebert/ponytail
     - dgalarza/**
     - dotnet/**
     - microsoft/**
