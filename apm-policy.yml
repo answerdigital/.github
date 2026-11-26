@@ -4,7 +4,7 @@
 # applies to every answerdigital repository that runs `apm install` or `apm audit --ci`.
 # The repository is public, so any workflow token can read it and anyone can see what we allow.
 # Field reference: https://microsoft.github.io/apm/reference/policy-schema/
-# Checked against APM 0.38.1. Read each APM release's policy notes before a repository moves to it.
+# Checked against APM 0.39.0. Read each APM release's policy notes before a repository moves to it.
 
 name: answerdigital-baseline
 version: "2026.11.23"
